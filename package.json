@@ -8,7 +8,9 @@
   "name": "basic-nodejs",
   "version": "1.0.0",
   "main": "app.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "pdfkit": "^0.18.0"
+  },
   "author": "Aditya",
   "license": "MIT",
   "description": "NodeJS Project with Expres FrameWork and Running in Docker Container"

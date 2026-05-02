@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(docker network inspect demo --format \"{{.Name}}\" 2>$null)"
+    ]
+  }
+}
