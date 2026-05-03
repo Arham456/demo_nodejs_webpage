@@ -1,0 +1,42 @@
+version: 2.1
+
+jobs:
+  build-and-push:
+    docker:
+      - image: cimg/base:stable
+
+    steps:
+      - checkout
+
+      - setup_remote_docker
+
+      - run:
+          name: Build Frontend Image
+          command: |
+            docker build -t $DOCKER_USERNAME/mern-frontend:circleci-latest ./mern/frontend
+
+      - run:
+          name: Build Backend Image
+          command: |
+            docker build -t $DOCKER_USERNAME/mern-backend:circleci-latest ./mern/backend
+
+      - run:
+          name: Login to Docker Hub
+          command: |
+            echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+
+      - run:
+          name: Push Frontend Image
+          command: |
+            docker push $DOCKER_USERNAME/mern-frontend:circleci-latest
+
+      - run:
+          name: Push Backend Image
+          command: |
+            docker push $DOCKER_USERNAME/mern-backend:circleci-latest
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build-and-push
